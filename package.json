@@ -19,5 +19,20 @@
   },
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nakato53/tsxna-framework.git"
+  },
+  "keywords": [
+    "XNA",
+    "TypeScript",
+    "inspired",
+    "Framework"
+  ],
+  "bugs": {
+    "url": "https://github.com/Nakato53/tsxna-framework/issues"
+  },
+  "homepage": "https://github.com/Nakato53/tsxna-framework#readme"
 }
