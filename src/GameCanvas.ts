@@ -7,11 +7,10 @@ export default class GameCanvas{
     private _height:number;
     private _scale:number = 3;
     private _canvas:HTMLCanvasElement;
-    private _buffer:HTMLCanvasElement;
     private _canvas_context: CanvasRenderingContext2D;
     
 
-    constructor(width:number, height:number, color:Color = Color.CornflowerBlue, parent:HTMLElement = document.body ){
+    constructor(width:number, height:number, parent:HTMLElement = document.body ){
         this._width = width;
         this._height = height;
 
