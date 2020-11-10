@@ -54,7 +54,6 @@ export default class SpriteBatch{
 
     public Draw(params:DrawCallParameter){
         let paramsExtended:any = params;
-        ;
         if(paramsExtended._texture !== undefined && paramsExtended._texture.Loaded){
             let source = paramsExtended._source;
             if(source == null){
@@ -71,7 +70,7 @@ export default class SpriteBatch{
             paramsExtended.setSource(source);
 
             if(paramsExtended._destination == null){
-                paramsExtended.setDestination(new Rectangle(paramsExtended._position.x,paramsExtended._position.y,paramsExtended._texture.Width, paramsExtended._texture.Height));
+                paramsExtended.setDestination(new Rectangle(paramsExtended._position.x,paramsExtended._position.y,source.Width, source.Height));
             }
             
             this._buffer.translate(Math.floor(paramsExtended._destination.X), Math.floor(paramsExtended._destination.Y));
