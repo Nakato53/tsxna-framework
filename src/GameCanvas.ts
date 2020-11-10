@@ -11,8 +11,8 @@ export default class GameCanvas{
     
 
     constructor(width:number, height:number, parent:HTMLElement = document.body ){
-        this._width = width;
-        this._height = height;
+        this._width = Math.floor(width);
+        this._height = Math.floor(height);
 
         this._canvas = <HTMLCanvasElement>document.createElement('canvas');
 
@@ -23,8 +23,8 @@ export default class GameCanvas{
 
         this._canvas.width = this._width;
         this._canvas.height = this._height;
-        this._canvas.style['width'] = this._width*this._scale + 'px';
-        this._canvas.style['height'] = this._height*this._scale + 'px';
+        this._canvas.style['width'] = Math.floor(this._width*this._scale) + 'px';
+        this._canvas.style['height'] = Math.floor(this._height*this._scale) + 'px';
         //this._canvas.style['backgroundColor'] = ""
 
         const style = document.createElement('style');
@@ -52,8 +52,8 @@ export default class GameCanvas{
     public resize(width:number, height:number):void{
         this._canvas.width = this._width;
         this._canvas.height = this._height;
-        this._canvas.style['width'] = this._width*this._scale + 'px';
-        this._canvas.style['height'] = this._height*this._scale + 'px';
+        this._canvas.style['width'] = Math.floor(this._width*this._scale) + 'px';
+        this._canvas.style['height'] = Math.floor(this._height*this._scale) + 'px';
     }
 
     public get scale():number{
@@ -62,8 +62,8 @@ export default class GameCanvas{
 
     public set scale(scale:number){
         this._scale = scale;
-        this._canvas.style['width'] = this._width*this._scale + 'px';
-        this._canvas.style['height'] = this._height*this._scale + 'px';
+        this._canvas.style['width'] = Math.floor(this._width*this._scale) + 'px';
+        this._canvas.style['height'] = Math.floor(this._height*this._scale) + 'px';
     }
 
     public get canvas():HTMLCanvasElement{
