@@ -11,6 +11,7 @@ export default class DrawCallParameter {
     protected _destination:Rectangle|null = null;
     protected _source:Rectangle|null = null;
     protected _origin:Vector2 = Vector2.Zero;
+    protected _angle:number = 0;
 
     constructor(
         texture:Texture2D
@@ -18,7 +19,11 @@ export default class DrawCallParameter {
     ){
         this._texture = texture
     }
-    
+
+    public setAngle(angle:number):DrawCallParameter{
+        this._angle = angle;
+        return this;
+    }
     public setColor(color : Color):DrawCallParameter {
         this._color = color;
         return this;    

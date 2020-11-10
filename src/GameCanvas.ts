@@ -20,6 +20,7 @@ export default class GameCanvas{
 
         parent.appendChild(this._canvas);
         this._canvas_context = this._canvas.getContext("2d");
+        this._canvas_context.imageSmoothingEnabled = false;
 
         this._canvas.width = this._width;
         this._canvas.height = this._height;
@@ -28,7 +29,7 @@ export default class GameCanvas{
         //this._canvas.style['backgroundColor'] = ""
 
         const style = document.createElement('style');
-        style.textContent = "#"+this._canvas.id+" {\
+        style.textContent = "#"+this._canvas.id+"{\
             image-rendering: optimizeSpeed;\
             image-rendering: -moz-crisp-edges;\
             image-rendering: -webkit-optimize-contrast;\

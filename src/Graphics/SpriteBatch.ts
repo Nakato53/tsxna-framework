@@ -42,6 +42,7 @@ export default class SpriteBatch{
 
     public Begin(){
         this._buffer = (<HTMLCanvasElement>document.createElement('canvas')).getContext("2d");
+        this._buffer.imageSmoothingEnabled = false;
         this._buffer.canvas.width = this._gameCanvas.width;
         this._buffer.canvas.height = this._gameCanvas.height;
     }
@@ -55,7 +56,6 @@ export default class SpriteBatch{
         let paramsExtended:any = params;
         ;
         if(paramsExtended._texture !== undefined && paramsExtended._texture.Loaded){
-         
             let source = paramsExtended._source;
             if(source == null){
                 source = (new Rectangle(0,0,paramsExtended._texture.Width, paramsExtended._texture.Height));
@@ -74,35 +74,52 @@ export default class SpriteBatch{
                 paramsExtended.setDestination(new Rectangle(paramsExtended._position.x,paramsExtended._position.y,paramsExtended._texture.Width, paramsExtended._texture.Height));
             }
             
+            this._buffer.translate(Math.floor(paramsExtended._destination.X), Math.floor(paramsExtended._destination.Y));
             if(paramsExtended._color.ToHEX()+paramsExtended._color.A !== Color.White.ToHEX()+255){
-             
                 var img = paramsExtended._texture.cacheColor(paramsExtended._color);
                 if(paramsExtended._color.A < 255){                   
-                    this._buffer.save();
+                    
                     this._buffer.globalAlpha = paramsExtended._color.A/255;
-
+                    if(paramsExtended._angle != 0)
+                        this._buffer.rotate(paramsExtended._angle*Math.PI/180);              
                     this.drawTexture(   img, 
                         paramsExtended._source.X, paramsExtended._source.Y, paramsExtended._source.Width, paramsExtended._source.Height,
-                        paramsExtended._destination.X, paramsExtended._destination.Y, paramsExtended._destination.Width, paramsExtended._destination.Height,
+                        0,0, paramsExtended._destination.Width, paramsExtended._destination.Height,
                         paramsExtended._origin.x,paramsExtended._origin.y
                     );
-                    
-                    this._buffer.restore();
+
+                    if(paramsExtended._angle != 0)
+                        this._buffer.rotate(-paramsExtended._angle*Math.PI/180);  
+                    this._buffer.globalAlpha = 1;
                 }else
                 {
-                    this.drawTexture(   img, 
-                        paramsExtended._source.X, paramsExtended._source.Y, paramsExtended._source.Width, paramsExtended._source.Height,
-                        paramsExtended._destination.X, paramsExtended._destination.Y, paramsExtended._destination.Width, paramsExtended._destination.Height,
-                        paramsExtended._origin.x,paramsExtended._origin.y
-    );
-                }
-            }else{
-                this.drawTexture(   paramsExtended._texture.Image, 
+
+                    if(paramsExtended._angle != 0)
+                        this._buffer.rotate(paramsExtended._angle*Math.PI/180);  
+                this.drawTexture(   img, 
                     paramsExtended._source.X, paramsExtended._source.Y, paramsExtended._source.Width, paramsExtended._source.Height,
-                    paramsExtended._destination.X, paramsExtended._destination.Y, paramsExtended._destination.Width, paramsExtended._destination.Height,
+                    0,0, paramsExtended._destination.Width, paramsExtended._destination.Height,
                     paramsExtended._origin.x,paramsExtended._origin.y
 );
+
+                    if(paramsExtended._angle != 0)
+                        this._buffer.rotate(-paramsExtended._angle*Math.PI/180);  
+                }
+            }else{
+                
+                if(paramsExtended._angle != 0)
+                this._buffer.rotate(paramsExtended._angle*Math.PI/180);  
+                this.drawTexture(   paramsExtended._texture.Image, 
+                    paramsExtended._source.X, paramsExtended._source.Y, paramsExtended._source.Width, paramsExtended._source.Height,
+                    0,0, paramsExtended._destination.Width, paramsExtended._destination.Height,
+                    paramsExtended._origin.x,paramsExtended._origin.y
+);
+
+if(paramsExtended._angle != 0)
+this._buffer.rotate(-paramsExtended._angle*Math.PI/180);  
+                
             }
+            this._buffer.translate(-Math.floor(paramsExtended._destination.X), -Math.floor(paramsExtended._destination.Y));
         }
     }
 
