@@ -1,4 +1,5 @@
 import Color from '../Color';
+import MathHelper from '../MathHelper';
 import Rectangle from '../Rectangle';
 import Texture2D from './../Content/Texture2D';
 import Vector2 from './../Vector2';
@@ -20,7 +21,15 @@ export default class DrawCallParameter {
         this._texture = texture
     }
 
-    public setAngle(angle:number):DrawCallParameter{
+    /**
+     * @description Set the angle rotation
+     * @param angle Angle value.
+     * @param isDegree Define if the angle parameter is in Degree, true by default.
+     */
+    public setAngle(angle:number, isDegree:boolean = true):DrawCallParameter{
+        if(!isDegree){
+            angle = MathHelper.ToDegrees(angle);
+        }
         this._angle = angle;
         return this;
     }
