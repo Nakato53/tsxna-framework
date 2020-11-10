@@ -1,5 +1,5 @@
 {
-  "name": "@nakato/tsxna-framework",
+  "name": "tsxna-framework",
   "version": "1.0.2",
   "description": "A simple TypeScript Game Framework",
   "main": "src/index.ts",
