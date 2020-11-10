@@ -1,1 +1,0 @@
-import GameTime from './src';
