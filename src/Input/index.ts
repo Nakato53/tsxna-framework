@@ -1,9 +1,10 @@
-import Keyboard from './Keyboard';
-import KeyboardState from './KeyboardState';
-import Mouse from './Mouse';
-import MouseState from './MouseState';
-import Keys from './Keys';
+// created from 'create-ts-index'
 
-export default {
-    Keyboard, KeyboardState, Mouse, MouseState, Keys
-}
+export * from './GamePad';
+export * from './GamePadState';
+export * from './Keyboard';
+export * from './KeyboardState';
+export * from './Keys';
+export * from './Mouse';
+export * from './MouseButtons';
+export * from './MouseState';

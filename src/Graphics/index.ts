@@ -1,4 +1,4 @@
-import SpriteBatch from './SpriteBatch';
-export default {
-    SpriteBatch
-}
+// created from 'create-ts-index'
+
+export * from './DrawCallParameter';
+export * from './SpriteBatch';

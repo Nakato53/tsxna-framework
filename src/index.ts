@@ -1,25 +1,13 @@
-import Color from './Color';
-import Game from './Game';
-import GameCanvas from './GameCanvas';
-import GameTime from './GameTime';
-import Rectangle from './Rectangle';
-import Utils from './Utils';
-import Vector2 from './Vector2';
-import Vector3 from './Vector3';
-import Graphics from './Graphics'
-import Content from './Content'
-import Input from './Input'
+// created from 'create-ts-index'
 
-export default {
-    Game,
-    GameCanvas,
-    Color,
-    GameTime,
-    Rectangle,
-    Utils,
-    Vector2,
-    Vector3,
-    Graphics,
-    Content,
-    Input
-}
+export * from './Content';
+export * from './Graphics';
+export * from './Input';
+export * from './Color';
+export * from './Game';
+export * from './GameCanvas';
+export * from './GameTime';
+export * from './Rectangle';
+export * from './Utils';
+export * from './Vector2';
+export * from './Vector3';
