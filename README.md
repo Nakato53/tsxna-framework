@@ -1,3 +1,3 @@
 #TSXNA-Framework
 
-Test
+A simple framework inspired by XNA

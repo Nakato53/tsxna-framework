@@ -50,8 +50,21 @@ export default class GameCanvas{
         return this._height;
     }
 
+    public resize(width:number, height:number):void{
+        this._canvas.width = this._width;
+        this._canvas.height = this._height;
+        this._canvas.style['width'] = this._width*this._scale + 'px';
+        this._canvas.style['height'] = this._height*this._scale + 'px';
+    }
+
     public get scale():number{
         return this._scale;
+    }
+
+    public set scale(scale:number){
+        this._scale = scale;
+        this._canvas.style['width'] = this._width*this._scale + 'px';
+        this._canvas.style['height'] = this._height*this._scale + 'px';
     }
 
     public get canvas():HTMLCanvasElement{
