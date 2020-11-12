@@ -3,6 +3,10 @@ import Loadable from './Loadable';
 
 export default class Texture2D extends Loadable{
 
+    public get Type():string{
+        return "Texture2D";
+    } 
+
     private _image:HTMLImageElement;
 
     private _colorCache:any = [];

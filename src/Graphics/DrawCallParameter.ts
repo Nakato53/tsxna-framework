@@ -42,6 +42,9 @@ export default class DrawCallParameter {
         return this;    
     }
     public setPosition(position : Vector2):DrawCallParameter {
+        if(this._destination != null){
+            console.warn("DrawCallParameter : Destination have already been set, Position will not be used.")
+        }
         this._position = position;    
         return this;    
     }
