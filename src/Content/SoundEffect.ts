@@ -19,4 +19,26 @@ export default class SoundEffect extends Loadable{
         this._audio = audio;
     }    
 
+    public Play():void{
+        this._audio.play();
+    }
+
+    public Pause():void{
+        this._audio.pause();
+    }
+
+    public get Paused():boolean{
+        return this._audio.paused;
+    }
+
+    public get CurrentTime():number{
+        return this._audio.currentTime;
+    }
+
+    public get inProgress():boolean{
+        return this._audio.currentTime > 0 && !this._audio.ended;
+    }
+
+    
+
 }
