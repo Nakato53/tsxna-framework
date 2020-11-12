@@ -4,31 +4,7 @@ import Texture2D from '../Content/Texture2D';
 import Color from '../Color';
 import Rectangle from '../Rectangle';
 import DrawCallParameter from './DrawCallParameter';
-
-
-class DrawCallParameterExtended extends DrawCallParameter{
-    public getTexture() : Texture2D {
-        return this._texture;
-    }
-    public get Texture() : Texture2D {
-        return this._texture;
-    }
-    public get Position() : Vector2 {
-        return this._position;
-    }
-    public get Color() : Color {
-        return this._color;
-    }
-    public get Destination() : Rectangle {
-        return this._destination;
-    }
-    public get Source() : Rectangle {
-        return this._source;
-    }
-    public get Origin() : Vector2 {
-        return this._origin;
-    }
-}
+import DrawStringCallParameter from './DrawStringCallParameter';
 
 export default class SpriteBatch{
     private _gameCanvas:GameCanvas;
@@ -80,7 +56,7 @@ export default class SpriteBatch{
                     
                     this._buffer.globalAlpha = paramsExtended._color.A/255;
                     if(paramsExtended._angle != 0)
-                        this._buffer.rotate(paramsExtended._angle*Math.PI/180);              
+                        this._buffer.rotate(paramsExtended._angle);              
                     this.drawTexture(   img, 
                         paramsExtended._source.X, paramsExtended._source.Y, paramsExtended._source.Width, paramsExtended._source.Height,
                         0,0, paramsExtended._destination.Width, paramsExtended._destination.Height,
@@ -88,13 +64,13 @@ export default class SpriteBatch{
                     );
 
                     if(paramsExtended._angle != 0)
-                        this._buffer.rotate(-paramsExtended._angle*Math.PI/180);  
+                        this._buffer.rotate(-paramsExtended._angle);  
                     this._buffer.globalAlpha = 1;
                 }else
                 {
 
                     if(paramsExtended._angle != 0)
-                        this._buffer.rotate(paramsExtended._angle*Math.PI/180);  
+                        this._buffer.rotate(paramsExtended._angle);  
                 this.drawTexture(   img, 
                     paramsExtended._source.X, paramsExtended._source.Y, paramsExtended._source.Width, paramsExtended._source.Height,
                     0,0, paramsExtended._destination.Width, paramsExtended._destination.Height,
@@ -102,23 +78,45 @@ export default class SpriteBatch{
 );
 
                     if(paramsExtended._angle != 0)
-                        this._buffer.rotate(-paramsExtended._angle*Math.PI/180);  
+                        this._buffer.rotate(-paramsExtended._angle);  
                 }
             }else{
                 
                 if(paramsExtended._angle != 0)
-                this._buffer.rotate(paramsExtended._angle*Math.PI/180);  
+                this._buffer.rotate(paramsExtended._angle);  
                 this.drawTexture(   paramsExtended._texture.Image, 
                     paramsExtended._source.X, paramsExtended._source.Y, paramsExtended._source.Width, paramsExtended._source.Height,
                     0,0, paramsExtended._destination.Width, paramsExtended._destination.Height,
                     paramsExtended._origin.x,paramsExtended._origin.y
-);
+                );
 
-if(paramsExtended._angle != 0)
-this._buffer.rotate(-paramsExtended._angle*Math.PI/180);  
+                if(paramsExtended._angle != 0)
+                    this._buffer.rotate(-paramsExtended._angle);  
                 
             }
             this._buffer.translate(-Math.floor(paramsExtended._destination.X), -Math.floor(paramsExtended._destination.Y));
+        }
+    }
+
+    public DrawString(params:DrawStringCallParameter){
+        let paramsExtended:any = params;
+        if(paramsExtended._font != undefined && paramsExtended._font.Loaded && paramsExtended._text !== undefined && paramsExtended._text !== ""){
+            this._buffer.translate(Math.floor(paramsExtended._position.X), Math.floor(paramsExtended._position.Y));
+
+            if(paramsExtended._angle != 0)
+                this._buffer.rotate(paramsExtended._angle);  
+        
+            this._buffer.font = paramsExtended._size+'px '+paramsExtended._font.Name;
+
+            this._buffer.fillStyle = Color.RGBAtoHEX(paramsExtended._color.R,paramsExtended._color.G,paramsExtended._color.B,paramsExtended._color.A);
+            this._buffer.fillText(paramsExtended._text, 0,paramsExtended._size -2);
+
+            
+
+            if(paramsExtended._angle != 0)
+                this._buffer.rotate(-paramsExtended._angle);  
+                           
+            this._buffer.translate(-Math.floor(paramsExtended._position.X), -Math.floor(paramsExtended._position.Y));
         }
     }
 

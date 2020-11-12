@@ -1,9 +1,5 @@
 import GameTime from './GameTime';
 import GameCanvas from './GameCanvas';
-import Keyboard from './Input/Keyboard';
-import Mouse from './Input/Mouse';
-import Keys from './Input/Keys';
-import Utils from './Utils';
 let gameLoop = require('./GameLoop');
 
 export default class Game{
@@ -23,6 +19,14 @@ export default class Game{
     private SetupInput(){
         window.TSXNA.Input.onLoadKeyboard();
         window.TSXNA.Input.onLoadMouse();
+    }
+
+    public get IsMouseVisible():boolean{
+        return this.canvas.IsMouseVisible;
+    }
+
+    public set IsMouseVisible(visible:boolean){
+        this.canvas.IsMouseVisible = visible;        
     }
 
     public async LoadContent():Promise<void>{

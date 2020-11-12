@@ -23,12 +23,12 @@ export default class DrawCallParameter {
 
     /**
      * @description Set the angle rotation
-     * @param angle Angle value.
-     * @param isDegree Define if the angle parameter is in Degree, true by default.
+     * @param angle Angle value in Radians.
+     * @param isDegree Define if the angle parameter is in Degree, false by default.
      */
-    public setAngle(angle:number, isDegree:boolean = true):DrawCallParameter{
-        if(!isDegree){
-            angle = MathHelper.ToDegrees(angle);
+    public setAngle(angle:number, isDegree:boolean = false):DrawCallParameter{
+        if(isDegree){
+            angle = MathHelper.ToRadians(angle);
         }
         this._angle = angle;
         return this;

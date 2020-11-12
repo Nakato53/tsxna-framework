@@ -48,6 +48,15 @@ export default class Color{
             ("0" + parseInt(result[2],10).toString(16)).slice(-2) +
             ("0" + parseInt(result[3],10).toString(16)).slice(-2) : '';
     }
+    public static RGBAtoHEX = (r:number, g:number, b:number, a:number) => {
+        let rgba = r+","+g+","+b+","+a;
+        let result = rgba.match(/^[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?/i);
+        return (result && result.length === 5) ? "#" +
+            ("0" + parseInt(result[1],10).toString(16)).slice(-2) +
+            ("0" + parseInt(result[2],10).toString(16)).slice(-2) +
+            ("0" + parseInt(result[3],10).toString(16)).slice(-2) +
+            ("0" + parseInt(result[4],10).toString(16)).slice(-2) : '';
+    }
 
     public static readonly Transparent = Color.FromHEXXNA("#000000",1);
 	public static readonly AliceBlue = Color.FromHEXXNA("#fff8f0",1);

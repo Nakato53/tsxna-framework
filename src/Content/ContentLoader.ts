@@ -1,7 +1,9 @@
 import Loadable from "./Loadable";
 import Texture2D from "./Texture2D";
 import SoundEffect from "./SoundEffect";
+import SpriteFont from "./SpriteFont";
 import Song from "./Song";
+import * as fontface from './FontFace';
 
 export default class ContentLoader{
 
@@ -21,10 +23,31 @@ export default class ContentLoader{
         if((myObject.Type) == "Texture2D"){
             return await (this.LoadTexture2D(path) as unknown as Promise<T>);
         }
+        if((myObject.Type) == "SpriteFont"){
+            return await (this.LoadSpriteFont(path) as unknown as Promise<T>);
+        }
         if(myObject.Type ==  "SoundEffect" || myObject.Type == "Song"){
             return await (this.LoadAudio(path) as unknown as Promise<T>);
         }
     }
+
+    
+    private async LoadSpriteFont(path:string):Promise<SpriteFont>{
+        return await (async () => {
+            
+            let loadedFont = new SpriteFont();
+            loadedFont.Font = new FontFace(path, 'url('+path+')');
+            loadedFont.Name = path;
+            try {
+                await loadedFont.Font.load();
+            } catch (error) {
+                console.error("Error while loading font : '"+path+"'");
+            }
+            
+            loadedFont.Loaded = true;
+            return loadedFont;
+        })();
+    } 
 
     private async LoadAudio(path:string):Promise<SoundEffect|Song>{
         return await (async () => {

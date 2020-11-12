@@ -5,9 +5,10 @@ export default class GameCanvas{
 
     private _width:number;
     private _height:number;
-    private _scale:number = 3;
+    private _scale:number = 1;
     private _canvas:HTMLCanvasElement;
     private _canvas_context: CanvasRenderingContext2D;
+    private _cursor:boolean = true;
     
 
     constructor(width:number, height:number, parent:HTMLElement = document.body ){
@@ -40,6 +41,17 @@ export default class GameCanvas{
         document.head.append(style);
 
         window.TSXNA.Canvas = this;
+    }
+
+    public get IsMouseVisible():boolean{
+        return this._cursor;
+    }
+
+    public set IsMouseVisible(visible:boolean){
+        this._cursor = visible;
+
+        visible ? this._canvas.style['cursor'] = "default":this._canvas.style['cursor'] = "none";
+        
     }
 
     public get width():number{
