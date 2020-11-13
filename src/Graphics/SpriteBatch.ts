@@ -19,12 +19,12 @@ export default class SpriteBatch{
     public Begin(){
         this._buffer = (<HTMLCanvasElement>document.createElement('canvas')).getContext("2d");
         this._buffer.imageSmoothingEnabled = false;
-        this._buffer.canvas.width = this._gameCanvas.width;
-        this._buffer.canvas.height = this._gameCanvas.height;
+        this._buffer.canvas.width = this._gameCanvas.Width;
+        this._buffer.canvas.height = this._gameCanvas.Height;
     }
 
     public End(){
-        this._gameCanvas.context.drawImage(this._buffer.canvas,0,0);
+        this._gameCanvas.Context.drawImage(this._buffer.canvas,0,0);
     }
 
 

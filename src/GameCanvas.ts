@@ -46,7 +46,7 @@ export default class GameCanvas{
 
 
         window.onresize = () =>{
-            this.resizeWindow();
+            this.ResizeWindow();
         }
     }
 
@@ -61,15 +61,15 @@ export default class GameCanvas{
         
     }
 
-    public get width():number{
+    public get Width():number{
         return this._width;
     }
 
-    public get height():number{
+    public get Height():number{
         return this._height;
     }
 
-    public resize(width:number, height:number):void{
+    public Resize(width:number, height:number):void{
         this._width = width;
         this._height = height;
         this._canvas.width = this._width;
@@ -86,22 +86,22 @@ export default class GameCanvas{
         this._autoScale = autoScale;
     }
 
-    public get scale():number{
+    public get Scale():number{
         return this._scale;
     }
 
-    public set scale(scale:number){
+    public set Scale(scale:number){
         this._scale = scale;
         this._canvas.style['width'] = Math.floor(this._width*this._scale) + 'px';
         this._canvas.style['height'] = Math.floor(this._height*this._scale) + 'px';
     
     }
 
-    public get canvas():HTMLCanvasElement{
+    public get Canvas():HTMLCanvasElement{
         return this._canvas;
     }
     
-    public get context():CanvasRenderingContext2D{
+    public get Context():CanvasRenderingContext2D{
         return this._canvas_context;
     }
 
@@ -116,7 +116,7 @@ export default class GameCanvas{
             }
           }
     }
-    private resizeWindow(){
+    private ResizeWindow(){
         if(this._autoScale){
             const scaleWidth = window.innerWidth / this._width;
             const scaleHeight = window.innerHeight / this._height;

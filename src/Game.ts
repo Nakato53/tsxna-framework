@@ -45,7 +45,7 @@ export default class Game{
         } 
 
         this._gameLoop = new gameLoop({
-            renderer: this.Canvas.context,
+            renderer: this.Canvas.Context,
             fps: 60
 		});
 
@@ -62,7 +62,7 @@ export default class Game{
 			this.Draw();
 		});
 
-		(<any>this.Canvas).resizeWindow();
+		(<any>this.Canvas).ResizeWindow();
 		this._gameLoop.start();
     }
 
