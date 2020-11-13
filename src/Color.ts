@@ -24,8 +24,11 @@ export default class Color{
         return this._a;
     }
 
-    public ToHEX():string{
-        return Color.RGBtoHEX(this._r, this._g, this.B);
+    public ToHEX(transparency:boolean=false):string{
+        if(transparency)
+            return Color.RGBAtoHEX(this._r, this._g, this.B, this.A);
+        else
+            return Color.RGBtoHEX(this._r, this._g, this.B);
     }
 
     public static FromHEX = (hex, alpha = 1) => {
@@ -33,12 +36,10 @@ export default class Color{
         return new Color(r,g,b,parseInt((alpha*255).toString()));
     };
 
-
     private static FromHEXXNA = (hex, alpha = 1) => {
         const [b, g, r] = hex.match(/\w\w/g).map(x => parseInt(x, 16));
         return new Color(r,g,b,parseInt((alpha*255).toString()));
     };
-
 
     public static RGBtoHEX = (r:number, g:number, b:number) => {
         let rgb = r+","+g+","+b;
@@ -48,6 +49,7 @@ export default class Color{
             ("0" + parseInt(result[2],10).toString(16)).slice(-2) +
             ("0" + parseInt(result[3],10).toString(16)).slice(-2) : '';
     }
+
     public static RGBAtoHEX = (r:number, g:number, b:number, a:number) => {
         let rgba = r+","+g+","+b+","+a;
         let result = rgba.match(/^[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?/i);
@@ -58,7 +60,7 @@ export default class Color{
             ("0" + parseInt(result[4],10).toString(16)).slice(-2) : '';
     }
 
-    public static readonly Transparent = Color.FromHEXXNA("#000000",1);
+    public static readonly Transparent = Color.FromHEXXNA("#000000",0);
 	public static readonly AliceBlue = Color.FromHEXXNA("#fff8f0",1);
     public static readonly AntiqueWhite = Color.FromHEXXNA("#d7ebfa",1);
 	public static readonly Aqua = Color.FromHEXXNA("#ffff00",1);

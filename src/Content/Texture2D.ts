@@ -21,7 +21,7 @@ export default class Texture2D extends Loadable{
     }
 
     get Height():number{
-        return this._image.width;
+        return this._image.height;
     }
 
     public get Image():HTMLImageElement{
@@ -32,7 +32,7 @@ export default class Texture2D extends Loadable{
         this._image = image;
     }
 
-    public cacheColor(color:Color):HTMLImageElement{
+    private cacheColor(color:Color):HTMLImageElement{
         if(color.ToHEX() !== Color.White.ToHEX()){
             if(this._colorCache[color.ToHEX()] === undefined){
                 var canvas = document.createElement('canvas');
@@ -74,7 +74,7 @@ export default class Texture2D extends Loadable{
         return this._colorCache[color.ToHEX()];
     }
 
-    public hasCacheColor(color:Color):boolean{
+    private hasCacheColor(color:Color):boolean{
        return this._colorCache[color.ToHEX()] !== undefined;
     }
 
