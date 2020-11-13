@@ -6,9 +6,11 @@ export default class GameCanvas{
     private _width:number;
     private _height:number;
     private _scale:number = 1;
+    private _autoScale:boolean = false;
     private _canvas:HTMLCanvasElement;
     private _canvas_context: CanvasRenderingContext2D;
     private _cursor:boolean = true;
+    
     
 
     constructor(width:number, height:number, parent:HTMLElement = document.body ){
@@ -41,6 +43,11 @@ export default class GameCanvas{
         document.head.append(style);
 
         window.TSXNA.Canvas = this;
+
+
+        window.onresize = () =>{
+            this.resizeWindow();
+        }
     }
 
     public get IsMouseVisible():boolean{
@@ -63,10 +70,20 @@ export default class GameCanvas{
     }
 
     public resize(width:number, height:number):void{
+        this._width = width;
+        this._height = height;
         this._canvas.width = this._width;
         this._canvas.height = this._height;
         this._canvas.style['width'] = Math.floor(this._width*this._scale) + 'px';
         this._canvas.style['height'] = Math.floor(this._height*this._scale) + 'px';
+    }   
+    
+    public get AutoScale():boolean{
+        return this._autoScale;
+    }
+
+    public set AutoScale(autoScale:boolean){
+        this._autoScale = autoScale;
     }
 
     public get scale():number{
@@ -77,6 +94,7 @@ export default class GameCanvas{
         this._scale = scale;
         this._canvas.style['width'] = Math.floor(this._width*this._scale) + 'px';
         this._canvas.style['height'] = Math.floor(this._height*this._scale) + 'px';
+    
     }
 
     public get canvas():HTMLCanvasElement{
@@ -85,6 +103,43 @@ export default class GameCanvas{
     
     public get context():CanvasRenderingContext2D{
         return this._canvas_context;
+    }
+
+    public fullscreen(){
+        function openFullscreen() {
+            if (this._canvas.requestFullscreen) {
+                this._canvas.requestFullscreen();
+            } else if (this._canvas.webkitRequestFullscreen) { /* Safari */
+                this._canvas.webkitRequestFullscreen();
+            } else if (this._canvas.msRequestFullscreen) { /* IE11 */
+                this._canvas.msRequestFullscreen();
+            }
+          }
+    }
+    private resizeWindow(){
+        if(this._autoScale){
+            const scaleWidth = window.innerWidth / this._width;
+            const scaleHeight = window.innerHeight / this._height;
+
+            let canvaWidth:string;
+            let canvaHeight:string;
+
+            if(scaleWidth<scaleHeight){
+                this._scale = scaleWidth;
+                canvaWidth = (this._width*scaleWidth).toFixed(1);
+                canvaHeight = (this._height*scaleWidth).toFixed(1);
+            }else{	
+                this._scale = scaleHeight;
+                canvaWidth = (this._width*scaleHeight).toFixed(1)
+                canvaHeight = (this._height*scaleHeight).toFixed(1)
+            }		
+            this._canvas.style["width"] = canvaWidth + "px";
+            this._canvas.style["height"] = canvaHeight + "px";
+
+            
+            this._canvas.style["marginLeft"] = (window.innerWidth-parseInt(canvaWidth))/2 + "px";
+            this._canvas.style["marginTop"] = (window.innerHeight-parseInt(canvaHeight))/2 + "px";
+        }
     }
 
     public Clear(color:Color):void{

@@ -62,7 +62,7 @@ export default class Game{
 			this.Draw();
 		});
 
-		
+		(<any>this.Canvas).resizeWindow();
 		this._gameLoop.start();
     }
 
