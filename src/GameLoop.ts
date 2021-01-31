@@ -1,7 +1,9 @@
-var Emitter = require('eventemitter2').EventEmitter2
-var now = require('performance-now')
-var inherits = require('inherits')
-var raf = require('raf')
+import emitter = require('eventemitter2')
+import now = require( 'performance-now')
+import inherits = require( 'inherits')
+import raf = require( 'raf')
+
+let Emitter = emitter.EventEmitter2;
 
 module.exports = Game
 inherits(Game, Emitter)

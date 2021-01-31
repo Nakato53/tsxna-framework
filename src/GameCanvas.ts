@@ -24,6 +24,12 @@ export default class GameCanvas{
         parent.appendChild(this._canvas);
         this._canvas_context = this._canvas.getContext("2d");
         this._canvas_context.imageSmoothingEnabled = false;
+        
+        this._canvas_context['imageSmoothingEnabled'] = false;       /* standard */
+        this._canvas_context['mozImageSmoothingEnabled'] = false;    /* Firefox */
+        this._canvas_context['oImageSmoothingEnabled'] = false;      /* Opera */
+        this._canvas_context['webkitImageSmoothingEnabled'] = false; /* Safari */
+        this._canvas_context['msImageSmoothingEnabled'] = false;     /* IE */
 
         this._canvas.width = this._width;
         this._canvas.height = this._height;
@@ -143,7 +149,8 @@ export default class GameCanvas{
     }
 
     public Clear(color:Color):void{
-        this._canvas_context.fillStyle = color.ToHEX();
+        this._canvas_context.clearRect(0, 0, this._canvas.width, this._canvas.height);
+        this._canvas_context.fillStyle = color.ToHEX(true);
         this._canvas_context.fillRect(0, 0, this._canvas.width, this._canvas.height);
     }
 }

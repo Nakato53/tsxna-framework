@@ -1,6 +1,12 @@
+import Game from "./Game";
+import GameCanvas from "./GameCanvas";
+
 declare global {
   interface Window { 
-    TSXNA:any 
+    TSXNA:{
+      Game:Game,
+      Canvas:GameCanvas
+    } 
   }
 }
 

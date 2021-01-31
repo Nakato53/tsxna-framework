@@ -19,12 +19,27 @@ export default class SpriteBatch{
     public Begin(){
         this._buffer = (<HTMLCanvasElement>document.createElement('canvas')).getContext("2d");
         this._buffer.imageSmoothingEnabled = false;
+        
+        this._buffer['imageSmoothingEnabled'] = false;       /* standard */
+        this._buffer['mozImageSmoothingEnabled'] = false;    /* Firefox */
+        this._buffer['oImageSmoothingEnabled'] = false;      /* Opera */
+        this._buffer['webkitImageSmoothingEnabled'] = false; /* Safari */
+        this._buffer['msImageSmoothingEnabled'] = false;     /* IE */
+
         this._buffer.canvas.width = this._gameCanvas.Width;
         this._buffer.canvas.height = this._gameCanvas.Height;
     }
 
     public End(){
         this._gameCanvas.Context.drawImage(this._buffer.canvas,0,0);
+    }
+
+    public getMainCanvas(){
+        return this._gameCanvas;
+    }
+
+    public getBuffer():CanvasRenderingContext2D{
+        return this._buffer;
     }
 
 

@@ -20,14 +20,20 @@ export default class Game{
         this.SetupInput();
         setTimeout( () => {this.LoadContent();}, 100);
 
+
+        if(window.TSXNA === undefined){
+            window.TSXNA = {
+                Canvas :null,
+                Game: null
+            }
+            
+        }
         window.TSXNA.Game = this;
     }
 
     private SetupInput(){
-        Keyboard.GetState();
-        Mouse.GetState();
-        window.TSXNA.Input.onLoadKeyboard();
-        window.TSXNA.Input.onLoadMouse();
+        (<any>Keyboard).onLoadKeyboard();
+        (<any>Mouse).onLoadMouse();
     }
 
     public get IsMouseVisible():boolean{

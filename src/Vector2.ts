@@ -16,6 +16,10 @@ export default class Vector2{
         this.y = y;
     }
 
+    public Clone():Vector2{
+        return new Vector2(this.x, this.y);
+    }
+
     public get X():number{
         return this.x;
     }
@@ -23,9 +27,17 @@ export default class Vector2{
         return this.y;
     }
 
+    public Distance(b:Vector2){
+        return Vector2.Distance(this, b);
+    }
+
     public static Zero:Vector2 = new Vector2(0,0);
     public static Left:Vector2 = new Vector2(-1,0);
     public static Right:Vector2 = new Vector2(1,0);
     public static Up:Vector2 = new Vector2(0,-1);
     public static Down:Vector2 = new Vector2(0,1);
+
+    public static Distance(a:Vector2, b:Vector2):number{
+        return Math.sqrt(Math.pow(a.X - b.X, 2) + Math.pow(a.Y - b.Y, 2));
+    }
 }

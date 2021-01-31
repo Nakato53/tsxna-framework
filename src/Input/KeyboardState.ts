@@ -7,11 +7,11 @@ export default class KeyboardState{
     private _keys = [];
 
     constructor(){
-        for (let item in Keys) {
-            if (isNaN(Number(item))) {
-                this._keys[item] = Keyboard.keys[item];
-            }
-        }
+            Object.keys(Keys).forEach(key => { 
+                if (isNaN(Number(key))) {
+                    this._keys[Keys[key]] = Keyboard.keys[Keys[key]];
+                }
+            });
     }
 
     public IsKeyDown(key:Keys):boolean{

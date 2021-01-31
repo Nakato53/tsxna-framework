@@ -9,6 +9,7 @@
   "author": "nakato",
   "license": "MIT",
   "dependencies": {
+    "@types/raf": "^3.4.0",
     "eventemitter2": "^6.4.3",
     "inherits": "^2.0.4",
     "performance-now": "^2.1.0",

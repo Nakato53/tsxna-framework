@@ -24,6 +24,13 @@ export default class Color{
         return this._a;
     }
 
+    
+    public ToHEXWithA(alpha:number):string{
+
+            return Color.RGBAtoHEX(this._r, this._g, this.B, alpha);
+
+    }
+
     public ToHEX(transparency:boolean=false):string{
         if(transparency)
             return Color.RGBAtoHEX(this._r, this._g, this.B, this.A);
